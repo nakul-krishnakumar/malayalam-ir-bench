@@ -1,7 +1,7 @@
 import numpy as np
 from typing import Dict, List, Union, Set
-from .recall import recall_at_k, recall_at_multiple_k
-from .ndcg import ndcg_at_k, ndcg_at_multiple_k
+from .recall import recall_at_k
+from .ndcg import ndcg_at_k
 from .mrr import mrr_at_k
 from .map import map_at_k
 from .precision import precision_at_k
