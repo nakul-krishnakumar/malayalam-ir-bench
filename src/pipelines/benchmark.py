@@ -5,6 +5,7 @@ import mlflow.pytorch
 import json
 import os
 from datetime import datetime
+import yaml
 
 def run_benchmark_pipeline(
    model_name: str, 
@@ -12,14 +13,25 @@ def run_benchmark_pipeline(
    config_path: str, 
    k_values: List[int] = [1, 5, 10], 
    download_dataset: bool = False, 
-   corpus_path: str = None, 
-   qrels_path: str = None, 
-   queries_path: str = None, 
-   engine: str = "pyarrow"
-):
+   corpus_url: str = None, 
+   qrels_url: str = None, 
+   queries_url: str = None, 
+   loader_engine: str = "pyarrow"
+): 
+   proj_config_path = os.path.join(config_path, "config.yaml")
+   model_config_path = os.path.join(config_path, "models.yaml")
+
+   with open(proj_config_path, 'r') as f:
+      configs = yaml.safe_load(f)
+      project = configs.get("project", {})
+      
    # Set experiment name
-   mlflow.set_experiment("Malayalam-IR-Benchmark")
-   
+   exp_name = project.get("name")
+   exp_desc = project.get("description")
+   mlflow.set_experiment(experiment_name=exp_name)
+   mlflow.set_experiment_tag("mflow.note.content", exp_desc)
+   print(f"[INFO] Starting experiment: {exp_name}")
+
    with mlflow.start_run(run_name=f"{model_name.replace('/', '_')}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"):
       
       # Log parameters
@@ -28,16 +40,15 @@ def run_benchmark_pipeline(
       mlflow.log_param("config_path", config_path)
       mlflow.log_param("k_values", k_values)
       mlflow.log_param("download_dataset", download_dataset)
-      mlflow.log_param("engine", engine)
+      mlflow.log_param("loader_engine", loader_engine)
       mlflow.log_param("timestamp", datetime.now().isoformat())
       
       # Initialize experiment runner
-      runner = ExperimentRunner(config_path=config_path)
+      runner = ExperimentRunner(config_path=model_config_path)
       
       # Log model configuration
       try:
-         import yaml
-         with open(config_path, 'r') as f:
+         with open(model_config_path, 'r') as f:
                configs = yaml.safe_load(f)
                model_config = configs.get(model_name, {})
                
@@ -59,19 +70,19 @@ def run_benchmark_pipeline(
       
       if download_dataset:
          mlflow.log_param("data_download", "performed")
-         data_loader.download_and_save_data(
-               corpus_path=corpus_path, 
-               qrels_path=qrels_path, 
-               queries_path=queries_path, 
-               engine=engine
+         data_loader.fetch_and_save_data(
+               corpus_url=corpus_url, 
+               queries_url=queries_url, 
+               qrels_url=qrels_url, 
+               engine=loader_engine
          )
       else:
          mlflow.log_param("data_download", "skipped")
       
       # Log dataset statistics
       try:
-         doc_texts, doc_ids = data_loader.load_corpus()
-         query_texts, query_ids = data_loader.load_queries()
+         doc_texts, _ = data_loader.load_corpus()
+         query_texts, _ = data_loader.load_queries()
          qrels = data_loader.load_qrels()
          
          mlflow.log_param("num_documents", len(doc_texts))
@@ -99,9 +110,9 @@ def run_benchmark_pipeline(
       
       # Log additional computed metrics
       for k in k_values:
-         if f'Recall@{k}' in results and f'MAP@{k}' in results:
-               f1_score = 2 * (results[f'Recall@{k}'] * results[f'MAP@{k}']) / (results[f'Recall@{k}'] + results[f'MAP@{k}']) if (results[f'Recall@{k}'] + results[f'MAP@{k}']) > 0 else 0
-               mlflow.log_metric(f"F1@{k}", f1_score)
+         if f'Recall_at_{k}' in results and f'MAP_at_{k}' in results:
+               f1_score = 2 * (results[f'Recall_at_{k}'] * results[f'MAP_at_{k}']) / (results[f'Recall_at_{k}'] + results[f'MAP_at_{k}']) if (results[f'Recall_at_{k}'] + results[f'MAP_at_{k}']) > 0 else 0
+               mlflow.log_metric(f"F1_at_{k}", f1_score)
       
       # Save detailed results as artifact
       results_file = "detailed_results.json"
@@ -133,16 +144,7 @@ def run_benchmark_pipeline(
       
       mlflow.log_artifact(model_info_file)
       os.remove(model_info_file)
-      
-      # Log the actual model (if possible)
-      try:
-         # This will depend on your ExperimentRunner implementation
-         # You might need to modify it to return the model object
-         model_obj = runner.get_model(model_name)  # You'll need to implement this
-         mlflow.pytorch.log_model(model_obj, "model")
-      except Exception as e:
-         mlflow.log_param("model_logging_error", str(e))
-      
+            
       # Set tags for better organization
       mlflow.set_tag("model_family", model_name.split('/')[0] if '/' in model_name else "unknown")
       mlflow.set_tag("language", "malayalam")

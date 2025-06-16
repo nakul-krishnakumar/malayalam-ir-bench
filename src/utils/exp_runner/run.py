@@ -3,7 +3,7 @@ import yaml
 from typing import Dict, List
 from src.utils import DataLoader, EmbeddingModel, IRBenchmarkEvaluator
 
-class ExperimentRunner:
+class ExperimentRunner():
    def __init__(self, config_path: str = "./src/configs/config.yaml"):
       self.config_path = config_path
       self.device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -22,24 +22,24 @@ class ExperimentRunner:
       
       # Load data
       data_loader = DataLoader(dataset_path)
-      doc_texts, doc_ids = data_loader.load_corpus()
-      query_texts, query_ids = data_loader.load_queries()
+      doc_ids, doc_texts = data_loader.load_corpus()
+      query_ids, query_texts = data_loader.load_queries()
       qrels = data_loader.load_qrels()
       
-      print(f"Loaded {len(doc_texts)} documents, {len(query_texts)} queries")
+      print(f"[INFO] Loaded {len(doc_texts)} documents, {len(query_texts)} queries")
       
       # Load model
       model = EmbeddingModel(model_name, self.config_path)
       
       # Encode texts
-      print("Encoding documents...")
+      print("[INFO] Encoding documents...")
       doc_embeddings = model.encode(doc_texts)
       
-      print("Encoding queries...")
+      print("[INFO] Encoding queries...")
       query_embeddings = model.encode(query_texts)
       
       # Evaluate
-      print("Computing metrics...")
+      print("[INFO] Computing metrics...")
       evaluator = IRBenchmarkEvaluator(doc_ids, query_ids, qrels)
       results = evaluator.evaluate_model(query_embeddings, doc_embeddings, k_values)
       
@@ -56,12 +56,12 @@ class ExperimentRunner:
                results = self.run_single_model(model_name, dataset_path, k_values)
                all_results[model_name] = results
                
-               print(f"\nResults for {model_name}:")
+               print(f"\n[INFO] Results for {model_name}:")
                for metric, score in results.items():
                   print(f"  {metric}: {score:.3f}")
                   
          except Exception as e:
-               print(f"Error evaluating {model_name}: {e}")
+               print(f"[ERROR] Could not evaluate {model_name}: {e}")
                all_results[model_name] = {"error": str(e)}
       
       return all_results

@@ -17,3 +17,9 @@ mlruns
 
 # Datasets
 datasets
+
+# Model cache
+models
+
+# Secrets
+.env

@@ -2,7 +2,7 @@
 
 # Project Information
 project:
-  name: "malayalam-ir-benchmark"
+  name: "Malayalam-IR-Benchmark"
   description: "Benchmarking multilingual models on Malayalam IR tasks"
 
 # MLflow Configuration
@@ -11,30 +11,6 @@ mlflow:
   tracking_uri: "mlruns"  # Local tracking
   log_models: true
   log_artifacts: true
-
-# Models to benchmark
-models:
-  multilingual_e5:
-    - name: "intfloat/multilingual-e5-base"
-      alias: "mE5-base"
-      batch_size: 32
-      max_seq_length: 512
-    - name: "intfloat/multilingual-e5-large"
-      alias: "mE5-large" 
-      batch_size: 16  # Smaller batch for large model
-      max_seq_length: 512
-      
-  bge_models:
-    - name: "BAAI/bge-m3"
-      alias: "mBGE-M3"
-      batch_size: 32
-      max_seq_length: 8192  # BGE-M3 supports longer sequences
-      
-  sentence_transformers:
-    - name: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-      alias: "paraphrase-multilingual"
-      batch_size: 64  # Smaller model, larger batch
-      max_seq_length: 384
 
 # Datasets
 datasets:
