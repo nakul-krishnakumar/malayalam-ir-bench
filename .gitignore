@@ -12,9 +12,6 @@ wheels/
 # ZenML local metadata
 .zen
 
-# MLFlow experiment tracking files
-mlruns
-
 # Datasets
 datasets
 

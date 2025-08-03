@@ -7,8 +7,8 @@ load_dotenv()
 login(os.getenv("HF_TOKEN"))
 
 if __name__ == "__main__":
-    model_name = "intfloat/multilingual-e5-large"
-    dataset_path = "./datasets/Bharat_NanoMSMARCO"
+    model_name = "intfloat/multilingual-e5-base"
+    dataset_path = "./datasets/MTEBIndicQARetrieval"
     config_path = "./src/configs"
 
     results = run_benchmark_pipeline(

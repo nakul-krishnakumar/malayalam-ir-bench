@@ -1,0 +1,15 @@
+artifact_uri: file:///home/nakul/devfiles/PROJECTS/malayalam-ir-bench/mlruns/195162169359845473/a56eca8d710b45e596135f55edb03e58/artifacts
+end_time: 1750100417021
+entry_point_name: ''
+experiment_id: '195162169359845473'
+lifecycle_stage: active
+run_id: a56eca8d710b45e596135f55edb03e58
+run_name: intfloat_multilingual-e5-base_20250616_185952
+run_uuid: a56eca8d710b45e596135f55edb03e58
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750100393184
+status: 3
+tags: []
+user_id: nakul

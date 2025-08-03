@@ -1,0 +1,25 @@
+{
+  "model_name": "intfloat/multilingual-e5-base",
+  "dataset_path": "./datasets/MTEBIndicQARetrieval",
+  "metrics": {
+    "Recall_at_1": 0.5406427221172023,
+    "NDCG_at_1": 0.5406427221172023,
+    "MAP_at_1": 0.5406427221172023,
+    "MRR_at_1": 0.5406427221172023,
+    "Recall_at_5": 0.8040327662255828,
+    "NDCG_at_5": 0.6835276701118669,
+    "MAP_at_5": 0.643205208989708,
+    "MRR_at_5": 0.643205208989708,
+    "Recall_at_10": 0.8701953371140516,
+    "NDCG_at_10": 0.7052554832705442,
+    "MAP_at_10": 0.6523654494353927,
+    "MRR_at_10": 0.6523654494353927
+  },
+  "k_values": [
+    1,
+    5,
+    10
+  ],
+  "timestamp": "2025-07-16T16:45:44.044036",
+  "model_config": {}
+}

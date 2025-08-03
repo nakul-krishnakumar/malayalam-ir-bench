@@ -1,0 +1,25 @@
+{
+  "model_name": "intfloat/multilingual-e5-large",
+  "dataset_path": "./datasets/Bharat_NanoMSMARCO",
+  "metrics": {
+    "Recall_at_1": 0.28,
+    "NDCG_at_1": 0.28,
+    "MAP_at_1": 0.28,
+    "MRR_at_1": 0.28,
+    "Recall_at_5": 0.56,
+    "NDCG_at_5": 0.42614980118558315,
+    "MAP_at_5": 0.38199999999999995,
+    "MRR_at_5": 0.38199999999999995,
+    "Recall_at_10": 0.7,
+    "NDCG_at_10": 0.4706210064056783,
+    "MAP_at_10": 0.39985714285714286,
+    "MRR_at_10": 0.39985714285714286
+  },
+  "k_values": [
+    1,
+    5,
+    10
+  ],
+  "timestamp": "2025-06-16T19:06:15.720485",
+  "model_config": {}
+}

@@ -1,0 +1,10 @@
+datasets:
+  - name: "Bharat_NanoMSMARCO_ml"
+    url: "https://huggingface.co/datasets/carlfeynman/Bharat_NanoMSMARCO_ml"
+    local_path: "datasets/Bharat_NanoMSMARCO_ml"
+    corpus:
+      download_link: "hf://datasets/carlfeynman/Bharat_NanoMSMARCO_ml/corpus/train-00000-of-00001.parquet"
+    qrels:
+      download_link: "hf://datasets/carlfeynman/Bharat_NanoMSMARCO_ml/qrels/train-00000-of-00001.parquet"
+    queries:
+      download_link: "hf://datasets/carlfeynman/Bharat_NanoMSMARCO_ml/queries/train-00000-of-00001.parquet"

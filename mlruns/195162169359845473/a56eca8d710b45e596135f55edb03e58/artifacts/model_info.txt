@@ -1,0 +1,19 @@
+Model: intfloat/multilingual-e5-base
+Dataset: ./datasets/Bharat_NanoMSMARCO
+Configuration: ./src/configs
+K Values: [1, 5, 10]
+Evaluation Date: 2025-06-16T19:00:17.017254
+
+Results:
+  Recall_at_1: 0.220
+  NDCG_at_1: 0.220
+  MAP_at_1: 0.220
+  MRR_at_1: 0.220
+  Recall_at_5: 0.520
+  NDCG_at_5: 0.380
+  MAP_at_5: 0.333
+  MRR_at_5: 0.333
+  Recall_at_10: 0.600
+  NDCG_at_10: 0.405
+  MAP_at_10: 0.343
+  MRR_at_10: 0.343

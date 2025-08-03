@@ -15,8 +15,8 @@ class DataLoader():
          os.makedirs(self.path, exist_ok=True)
 
          df_corpus = pd.read_parquet(corpus_url, engine=engine)
-         df_qrels = pd.read_parquet(queries_url, engine=engine)
-         df_queries = pd.read_parquet(qrels_url,engine=engine)
+         df_qrels = pd.read_parquet(qrels_url, engine=engine)
+         df_queries = pd.read_parquet(queries_url,engine=engine)
 
          df_corpus.to_json(self.corpus_path, orient="records", lines=True)
          df_queries.to_json(self.queries_path, orient="records", lines=True)
@@ -60,8 +60,10 @@ class DataLoader():
          for _, row in df_qrels.iterrows():
             qid = str(row['query-id'])
             did = str(row['corpus-id'])
-            qrels.setdefault(qid, {})[did] = 1
-         
+            score = int(row['score']) if 'score' in df_qrels.columns else 1 # relevance score defaults to 1 if not present
+            # Initialize qrels dict
+            qrels.setdefault(qid, {})[did] = score 
+         # Convert to dict of dicts
          return qrels
 
       except Exception as e:

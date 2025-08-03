@@ -1,0 +1,19 @@
+Model: intfloat/multilingual-e5-base
+Dataset: ./datasets/MTEBIndicQARetrieval
+Configuration: ./src/configs
+K Values: [1, 5, 10]
+Evaluation Date: 2025-07-16T16:45:44.046158
+
+Results:
+  Recall_at_1: 0.541
+  NDCG_at_1: 0.541
+  MAP_at_1: 0.541
+  MRR_at_1: 0.541
+  Recall_at_5: 0.804
+  NDCG_at_5: 0.684
+  MAP_at_5: 0.643
+  MRR_at_5: 0.643
+  Recall_at_10: 0.870
+  NDCG_at_10: 0.705
+  MAP_at_10: 0.652
+  MRR_at_10: 0.652
