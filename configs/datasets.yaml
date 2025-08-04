@@ -1,0 +1,13 @@
+Bharat_NanoMSMARCO:
+    path: "./datasets/Bharat_NanoMSMARCO"
+    link: "https://huggingface.co/datasets/carlfeynman/Bharat_NanoMSMARCO_ml"
+    corpus_url: "hf://datasets/carlfeynman/Bharat_NanoMSMARCO_ml/corpus/train-00000-of-00001.parquet"
+    queries_url: "hf://datasets/carlfeynman/Bharat_NanoMSMARCO_ml/queries/train-00000-of-00001.parquet"
+    qrels_url: "hf://datasets/carlfeynman/Bharat_NanoMSMARCO_ml/qrels/train-00000-of-00001.parquet"
+
+MTEBIndicQARetrieval:
+    path: "./datasets/MTEBIndicQARetrieval"
+    link: "https://huggingface.co/datasets/mteb/IndicQARetrieval"
+    corpus_url: "https://huggingface.co/datasets/mteb/IndicQARetrieval/resolve/main/ml-corpus/test-00000-of-00001.parquet"
+    queries_url: "https://huggingface.co/datasets/mteb/IndicQARetrieval/resolve/main/ml-queries/test-00000-of-00001.parquet"
+    qrels_url: "https://huggingface.co/datasets/mteb/IndicQARetrieval/resolve/main/ml-qrels/test-00000-of-00001.parquet"

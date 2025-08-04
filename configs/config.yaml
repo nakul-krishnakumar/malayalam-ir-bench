@@ -12,30 +12,6 @@ mlflow:
   log_models: true
   log_artifacts: true
 
-# Datasets
-datasets:
-  location:
-  - path: "./datasets"
-
-  primary:
-    name: "Bharat_NanoMSMARCO"
-    link: "https://huggingface.co/datasets/carlfeynman/Bharat_NanoMSMARCO_ml"
-    corpus_link: "hf://datasets/carlfeynman/Bharat_NanoMSMARCO_ml/corpus/train-00000-of-00001.parquet"
-    queries_link: "hf://datasets/carlfeynman/Bharat_NanoMSMARCO_ml/queries/train-00000-of-00001.parquet"
-    qrels_link: "hf://datasets/carlfeynman/Bharat_NanoMSMARCO_ml/qrels/train-00000-of-00001.parquet"
-    language: "malayalam"
-    
-  # For future projects
-  translated:
-    name: "BEIR_Malayalam_Translated"
-    link: "../datasets/BEIR_Malayalam/"
-    enabled: false  # Enable for Project 3
-    
-  synthetic:
-    name: "Malayalam_Synthetic_Queries"
-    link: "../datasets/Synthetic_Malayalam/"
-    enabled: false  # Enable for Project 4
-
 # Evaluation Configuration
 evaluation:
   # Metrics to compute
